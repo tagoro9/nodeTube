@@ -1,0 +1,54 @@
+body {
+	width: 90%;
+	margin: auto;
+}
+
+.page {
+	margin: auto;
+}
+
+#logo {
+	font-size: 3em;
+}
+
+#logo small {
+	font-size: 40%;
+}
+
+.padded {
+	padding: 2% 0%;
+}
+
+.videos {
+	width: 70%;
+	margin: auto;
+	text-align: center;
+}
+
+.tile > div.brand p.text {
+	position: relative;
+	left: 2%;
+	right: auto;
+	top: auto;
+	bottom: auto;
+	margin-top: 3%;
+	margin-left: 4%;
+}
+
+.tile.larger {
+	width: 200px;
+	height: 200px;
+}
+
+#searchSpan {
+	float: right;
+}
+
+#search .input-control {
+	margin-left: 40px; 
+	width: 200px;
+}
+
+.video-play {
+	padding: 30px;
+}
