@@ -3,6 +3,23 @@
 #Libraries needed
 fs = require 'fs'
 
+mimeTypes = {
+".swf": "application/x-shockwave-flash",
+	".flv": "video/x-flv",
+	".mp4": "video/mp4",
+	".avi": "video/x-msvideo",
+	".mpa": "video/mpeg",
+	".mpe": "video/mpeg",
+	".mpeg": "video/mpeg",
+	".mpg": "video/mpeg",
+	".mpv2": "video/mpeg",
+	".mov": "video/quicktime",
+	".movie": "video/x-sgi-movie",
+	".mp2": "video/mpeg",
+	".qt": "video/quicktime",
+}
+
+
 class nodeTube
 	constructor: (req,res) -> #video id in req.param 'id'
 		#log file requested
