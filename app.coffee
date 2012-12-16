@@ -14,7 +14,7 @@ app.configure ->
 	app.set 'view engine', 'ejs' #views engine
 
 #Load nodeTube module
-nodeTube = require './nodeTube'
+nodeTube = require('./nodeTube')
 
 app.get '/', (req,res) ->
 	res.render "index"

@@ -1,40 +1,38 @@
 #Video streming handler
-
 #Libraries needed
 fs = require 'fs'
 
-mimeTypes = {
-".swf": "application/x-shockwave-flash",
-	".flv": "video/x-flv",
-	".mp4": "video/mp4",
-	".avi": "video/x-msvideo",
-	".mpa": "video/mpeg",
-	".mpe": "video/mpeg",
-	".mpeg": "video/mpeg",
-	".mpg": "video/mpeg",
-	".mpv2": "video/mpeg",
-	".mov": "video/quicktime",
-	".movie": "video/x-sgi-movie",
-	".mp2": "video/mpeg",
-	".qt": "video/quicktime",
-}
-
+isNumber = (n) ->
+	!isNaN(parseFloat(n)) && isFinite(n)
 
 class nodeTube
-	constructor: (req,res) -> #video id in req.param 'id'
-		#log file requested
-		stat = fs.statSync('./public/videos/truhan.mp4')
-		console.log stat
-		start = 0
-		end = (stat.size) - 1
-		range = req.header 'Range'
-		console.log range
+	constructor: (@req,@res) -> #video id in req.param 'id'	
+		@info = {}
+		@info.path = './public/videos/truhan.mp4'
+		stat = fs.statSync @info.path
+
+		@info.start = 0
+		@info.end = stat.size - 1 
+		@info.size = stat.size
+		@info.modified = stat.mtime
+
+		range = @req.headers.range.match(/bytes=(.+)-(.+)?/)
+		@info.start = parseInt(range[1]) if range[1] >= 0 && range[1] < @info.end && isNumber(range[1])
+		@info.end = parseInt(range[2]) if range[2] > @info.start && range[2] <= @info.end && isNumber(range[2])
+		@info.length = @info.end - @info.start + 1
+
 		res.writeHead 206, {
-    		'Connection':'close'
-    		'Content-Range':'bytes '+start+'-'+end+'/'+stat.size
-    		'Transfer-Encoding':'chunked'
-    	}
-  		stream = fs.createReadStream './public/videos/truhan.mp4', flags: 'r', start: start, end: end
-  		stream.pipe res    	
+  			'Connection': 'close'
+  			"Status" : "206 Partial Content"
+  			"Accept-Ranges": "bytes"
+  			'Content-Range':'bytes '+@info.start+'-'+@info.end+'/'+@info.size
+  			"Last-Modified" : @info.modified.toUTCString()
+  			"Content-Transfer-Encoding": "binary"
+  			"Content.length": @info.length
+  			'Transfer-Encoding':'chunked'
+  		}
+		stream = fs.createReadStream @info.path, flags: 'r', start: @info.start, end: @info.end
+		stream.pipe @res  	
+		return true	
 
 module.exports = nodeTube
