@@ -50,5 +50,6 @@ body {
 }
 
 .video-play {
-	padding: 30px;
+	padding: 50px;
+	opacity: 0.9;
 }

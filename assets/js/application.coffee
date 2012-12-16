@@ -3,9 +3,8 @@ $ ->
 		$.facebox("""
 			<div class="video-play">
 				<video id="video_box" class="video-js vjs-default-skin" controls
-  					preload="auto" width="640" height="264" poster="my_video_poster.png">
-						<source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'/>
-					<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'/>
+  					preload="auto" width="640" height="360" poster="my_video_poster.png">
+						<source src="/video/1" type='video/mp4'/>
 				</video>
 			</div>
 			""")
@@ -17,5 +16,6 @@ $ ->
 	        $('#facebox').css('top', (Math.floor((windowHeight - faceboxHeight) / 2) + $(window).scrollTop()) )
 
 	$(document).bind 'afterClose.facebox', () ->
+		_V_.players = {}
 		$('.video-play').remove()
   
