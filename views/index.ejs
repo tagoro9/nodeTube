@@ -13,9 +13,9 @@
 	<%- js('video') %>
 	<%- js('application') %>
 </head>
-<body class="bg-color-blueDark">
+<body class="bg-color-blue">
 	<header class="page">
-		<div class="nav-bar bg-color-darken">
+		<div class="nav-bar bg-color-blueDark">
 			<div class="nav-bar-inner padding20">
 				<span class="pull-menu"></span>
 				<a href="/">
@@ -27,52 +27,31 @@
 			</div>
 		</div>
 	</header>
-	<article class="padded grid">
+	<article class="grid padded">
 		<section class="row">
-			<div id="player" class="span6 offset1">
+			<div id="player" class="span6">
 				<video id="video_box" class="video-js vjs-default-skin" controls
-						preload="auto" autoplay width="640" height="360" poster="my_video_poster.png" data-setup="{}">
+						preload="auto" autoplay width="854" height="480" data-setup="{}">
 						<source src="/video/1" type='video/mp4'/>
 				</video>			
 			</div>
-			<section class="videos span6 offset2">
-				<div class="tile image" data-url="video/1">
-					<div class="tile-content">
-						<img src="/truhan.png">
+			<section class="videos span6 offset5">
+				<% for (var key in videos) {
+					video = videos[key] %>
+					<div class="tile image" data-url="video/<%=key%>" data-mime="<%=videos[key]['mime']%>">
+						<div class="tile-content">
+							<img src="/posters/<%=video['poster']%>">
+						</div>
+						<div class="brand bg-color-purple">
+							<p class="text"><%=video['title']%></p>
+						</div>
 					</div>
-					<div class="brand bg-color-yellow">
-						<p class="text">Título del video</p>
-					</div>
-				</div>
-				<div class="tile image" data-url="video/2">
-					<div class="tile-content">
-						<img src="">
-					</div>
-					<div class="brand bg-color-yellow">
-						<p class="text">Título del video</p>
-					</div>
-				</div>	
-				<div class="tile image">
-					<div class="tile-content">
-						<img src="">
-					</div>
-					<div class="brand bg-color-yellow">
-						<p class="text">Título del video</p>
-					</div>
-				</div>
-				<div class="tile image">
-					<div class="tile-content">
-						<img src="">
-					</div>
-					<div class="brand bg-color-yellow">
-						<p class="text">Título del video</p>
-					</div>
-				</div>				
+				<% } %>							
 			</section>
 		</section>
 	</article>
 	<footer>
-		<div class="nav-bar bg-color-darken">
+		<div class="nav-bar bg-color-blueDark">
 			<div class="nav-bar-inner padding10">
 				<span class="element">
 					<time>2012</time> Sistemas y tecnologías web - Víctor Mora Afonso

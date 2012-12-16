@@ -5,6 +5,9 @@ PORT = 8080 #Listen port
 #Create express app
 express = require 'express'
 app = express()
+#Redis
+redis = require 'redis'
+client = redis.createClient()
 
 #Configure express server
 app.configure ->
@@ -17,7 +20,15 @@ app.configure ->
 nodeTube = require('./nodeTube')
 
 app.get '/', (req,res) ->
-	res.render "index"
+	client.lrange "ids",0,-1,(err,ids) ->
+		videos = {}
+		times = 1
+		for id in ids
+			client.get "videos:#{id}", (err,video) ->
+				videos[id] = JSON.parse video
+				if times == ids.length
+					res.render "index", { videos: videos }
+				times++
 
 #Get some video
 app.get '/video/:id', nodeTube
