@@ -7,7 +7,6 @@ $ ->
 		aspectRatio = 9/16
 		resize = () ->
 			width = document.getElementById(player.id).parentElement.offsetWidth
-			console.log document.body.offsetWidth
 			player.width(width).height(width * aspectRatio)	
 			if document.body.offsetWidth < 1250
 				$('.videos').removeClass 'span5'

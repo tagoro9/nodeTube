@@ -26,8 +26,11 @@ app.get '/', (req,res) ->
 		async.map ids.reverse(),
 		(id,callback) ->
 			client.get "videos:#{id}", (err,video) ->
-				callback err, JSON.parse(video)
+				vid = JSON.parse video
+				vid['id'] = id
+				callback err, vid
 		,(err, videos) ->
+			console.log videos
 			res.render "index", {videos: videos}
 
 #Get some video

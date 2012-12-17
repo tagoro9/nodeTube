@@ -37,9 +37,8 @@
 				</video>			
 			</div>				
 			<div class="videos span5">
-				<% for (var key in videos) {
-					video = videos[key] %>
-					<div class="tile image" data-url="video/<%=key%>" data-mime="<%=videos[key]['mime']%>">
+				<% videos.forEach(function(video) { %>
+					<div class="tile image" data-url="video/<%=video['id']%>" data-mime="<%=video['mime']%>">
 						<div class="tile-content">
 							<img src="/posters/<%=video['poster']%>">
 						</div>
@@ -47,7 +46,7 @@
 							<p class="text"><%=video['title']%></p>
 						</div>
 					</div>
-				<% } %>							
+				<% }); %>							
 			</div>
 		</section>
 	</article>
