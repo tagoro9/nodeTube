@@ -29,13 +29,13 @@
 	</header>
 	<article class="grid padded">
 		<section class="row">
-			<div id="player" class="span6">
+			<div id="player">
 				<video id="video_box" class="video-js vjs-default-skin" controls
-						preload="auto" autoplay width="854" height="480" data-setup="{}">
+						preload="auto" autoplay data-setup="{}">
 						<source src="/video/1" type='video/mp4'/>
 				</video>			
-			</div>
-			<section class="videos span6 offset5">
+			</div>				
+			<div class="videos span5">
 				<% for (var key in videos) {
 					video = videos[key] %>
 					<div class="tile image" data-url="video/<%=key%>" data-mime="<%=videos[key]['mime']%>">
@@ -47,17 +47,17 @@
 						</div>
 					</div>
 				<% } %>							
-			</section>
+			</div>
 		</section>
 	</article>
 	<footer>
 		<div class="nav-bar bg-color-blueDark">
 			<div class="nav-bar-inner padding10">
 				<span class="element">
-					<time>2012</time> Sistemas y tecnologías web - Víctor Mora Afonso
+					<time>2012</time> <span>Sistemas y tecnologías web</span> <span>- Víctor Mora Afonso</span>
 				</span>
 			</div>
 		</div>
-	</footer>
+	</footer>	
 </body>
 </html>

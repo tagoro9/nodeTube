@@ -33,35 +33,66 @@ article {
 	margin-left: 4%;
 }
 
-.tile.larger {
-	width: 200px;
-	height: 200px;
-}
-
-#searchSpan {
-	float: right;
-}
-
-#search .input-control {
-	margin-left: 40px; 
-	width: 200px;
-}
-
-.video-play {
-	padding: 50px;
-	opacity: 0.9;
-}
-
 #player {
-	padding-left: 30px;
+	margin-left: 30px;
+	width: 60%;
+	float: left;
+}
+
+video {
+	max-width: 100%;
+	height: auto;
 }
 
 .videos {
 	padding-left: 60px;
+	max-height: 320px;
 }
 
 footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+}
+
+@media (max-width: 1250px) {
+	footer {
+		position: relative;
+	}
+	#player {
+		margin: 0px auto;
+		width: 80%;
+		float: inherit;
+	}
+	.videos {
+		padding-left: 0;
+		margin: auto;
+		text-align: center;
+		padding-top: 50px;
+		max-height: none;
+
+	}
+	.tile {
+		float: none;
+		display: inline-block;
+	}
+}
+
+@media (max-width: 423px) {
+	.tile {
+		margin: 10px auto;
+		display: block;
+	}
+	footer time {
+		display: block;
+	}
+	footer span {
+		display: block;
+	}
+	footer .nav-bar-inner {
+		padding-bottom: 30px;
+	}
+	header .nav-bar-inner {
+		padding-bottom: 50px;
+	}
 }

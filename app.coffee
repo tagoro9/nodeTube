@@ -1,6 +1,6 @@
 #Simple node.js video streamer
 
-PORT = 8080 #Listen port
+PORT = 80 #Listen port
 
 #Create express app
 express = require 'express'
