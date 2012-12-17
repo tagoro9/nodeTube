@@ -8,6 +8,8 @@ app = express()
 #Redis
 redis = require 'redis'
 client = redis.createClient()
+#Async
+async = require 'async'
 
 #Configure express server
 app.configure ->
@@ -21,6 +23,14 @@ nodeTube = require('./nodeTube')
 
 app.get '/', (req,res) ->
 	client.lrange "ids",0,-1,(err,ids) ->
+		async.map ids.reverse(),
+		(id,callback) ->
+			client.get "videos:#{id}", (err,video) ->
+				callback err, JSON.parse(video)
+		,(err, videos) ->
+			res.render "index", {videos: videos}
+###
+	client.lrange "ids",0,-1,(err,ids) ->
 		@videos = {}
 		times = 1
 		for id in ids.reverse()
@@ -32,6 +42,7 @@ app.get '/', (req,res) ->
 					console.log @videos
 					res.render "index", { videos: @videos }
 				times++
+###
 
 #Get some video
 app.get '/video/:id', nodeTube

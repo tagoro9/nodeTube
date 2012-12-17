@@ -8,7 +8,8 @@
     "ejs": "*",
     "connect-assets": "*",
     "ejs-locals": "*",
-    "redis" : "*"
+    "redis" : "*",
+    "async": "*"
   },
   "engines": {
     "node": "0.8.x",
