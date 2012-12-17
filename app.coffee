@@ -29,20 +29,6 @@ app.get '/', (req,res) ->
 				callback err, JSON.parse(video)
 		,(err, videos) ->
 			res.render "index", {videos: videos}
-###
-	client.lrange "ids",0,-1,(err,ids) ->
-		@videos = {}
-		times = 1
-		for id in ids.reverse()
-			client.get "videos:#{id}", (err,video) ->
-				@videos[times] = JSON.parse video
-				console.log video
-				console.log @videos
-				if times == ids.length
-					console.log @videos
-					res.render "index", { videos: @videos }
-				times++
-###
 
 #Get some video
 app.get '/video/:id', nodeTube
