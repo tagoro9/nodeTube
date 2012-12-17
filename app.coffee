@@ -21,13 +21,16 @@ nodeTube = require('./nodeTube')
 
 app.get '/', (req,res) ->
 	client.lrange "ids",0,-1,(err,ids) ->
-		videos = {}
+		@videos = {}
 		times = 1
-		for id in ids
+		for id in ids.reverse()
 			client.get "videos:#{id}", (err,video) ->
-				videos[id] = JSON.parse video
+				@videos[times] = JSON.parse video
+				console.log video
+				console.log @videos
 				if times == ids.length
-					res.render "index", { videos: videos }
+					console.log @videos
+					res.render "index", { videos: @videos }
 				times++
 
 #Get some video
