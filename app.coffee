@@ -22,15 +22,14 @@ app.configure ->
 nodeTube = require('./nodeTube')
 
 app.get '/', (req,res) ->
-	client.lrange "ids",0,-1,(err,ids) ->
-		async.map ids.reverse(),
+	client.smembers "ids:videos", (err,ids) ->
+		async.map ids,
 		(id,callback) ->
 			client.get "videos:#{id}", (err,video) ->
 				vid = JSON.parse video
 				vid['id'] = id
 				callback err, vid
 		,(err, videos) ->
-			console.log videos
 			res.render "index", {videos: videos}
 
 #Get some video
